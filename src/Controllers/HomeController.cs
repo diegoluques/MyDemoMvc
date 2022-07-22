@@ -8,16 +8,35 @@ namespace MyDemoMvc.Controllers
     public class HomeController : Controller
     {
         [Route("")]
-        [Route("pagina-inicial")]
-        [Route("pagina-inicial/{id:int}/{categoria?}")]
-        public IActionResult Index(int id, string categoria)
+        //[Route("pagina-inicial")]
+        //[Route("pagina-inicial/{id:int}/{categoria?}")]
+        public IActionResult Index()
         {
-            return View();
+            var filme = new Filme
+            {
+                Titulo = "Filme 01",
+                DataLancamento = DateTime.Now,
+                Genero = null,
+                Avaliacao = 10,
+                Valor = 20000
+            };
+            return RedirectToAction("Privacy", filme);
+            //return View();
         }
 
         [Route("privacy")]
-        public IActionResult Privacy()
+        public IActionResult Privacy(Filme filme)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            foreach(var error in ModelState.Values.SelectMany(m => m.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+
             return View();
         }
 
