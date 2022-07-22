@@ -4,25 +4,24 @@ using System.Diagnostics;
 
 namespace MyDemoMvc.Controllers
 {
+    [Route("gestao")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
+        [Route("")]
+        [Route("pagina-inicial")]
+        [Route("pagina-inicial/{id:int}/{categoria?}")]
+        public IActionResult Index(int id, string categoria)
         {
             return View();
         }
 
+        [Route("privacy")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
